@@ -44,6 +44,6 @@ static const uint32_t RCON[11] = {
 
 
 void generate_aes_key_struct(AES_KEY* key, size_t key_len);
-void aes128(AES_KEY* key);
+void aes(AES_KEY* key);
 
 #endif

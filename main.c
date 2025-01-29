@@ -12,7 +12,7 @@ int main() {
     }
     printf("\n");
 
-    aes128(&aes_key);
+    aes(&aes_key);
 
     return 0;
 }

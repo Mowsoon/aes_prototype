@@ -1,8 +1,5 @@
 #include "aes.h"
 
-void aes128();
-
-
 
 void generate_aes_key_struct(AES_KEY* key, size_t key_len) {
     if (key_len != 128 && key_len != 192 && key_len != 256) {
@@ -18,19 +15,7 @@ void generate_aes_key_struct(AES_KEY* key, size_t key_len) {
 }
 
 
-void aes(AES_KEY* key) {
-    switch (key->key_size) {
-        case 16:
-            aes128(key);
-        case 24:
-            printf("192\n");
-        case 32:
-            printf("256\n");
-        default:
-            printf("Key is NULL\n");
-            exit(1);
-    }
-}
+
 
 uint32_t rotate_left(uint32_t word) {
     return (word << 8) | (word >> 24);
@@ -78,4 +63,22 @@ void aes128(AES_KEY* key) {
     uint32_t round_key[KEYS_128][KEY_SIZE];
     gen_keys128(key, round_key);
 
+}
+
+
+void aes(AES_KEY* key) {
+    switch (key->key_size) {
+        case 16:
+            aes128(key);
+        break;
+        case 24:
+            printf("192\n");
+        break;
+        case 32:
+            printf("256\n");
+        break;
+        default:
+            printf("Key is NULL\n");
+        exit(1);
+    }
 }
