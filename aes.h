@@ -2,9 +2,7 @@
 #define AES_H
 
 
-#define WORDS_192 52
 #define WORDS_256 60
-#define KEYS_192 13
 #define KEYS_256 15
 #define KEY_SIZE 4
 
