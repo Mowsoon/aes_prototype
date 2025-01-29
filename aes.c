@@ -1,7 +1,7 @@
 #include "aes.h"
 
 
-void generate_aes_key_struct(AES_KEY* key, size_t key_len) {
+void generate_aes_key(AES_KEY* key, size_t key_len) {
     if (key_len != 128 && key_len != 192 && key_len != 256) {
         printf("Key size must be 128 or 192 or 256\n");
         exit(1);
