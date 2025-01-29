@@ -32,6 +32,9 @@ void aes(AES_KEY* key) {
     }
 }
 
+uint32_t rotate_left(uint32_t word) {
+    return (word << 8) | (word >> 24);
+}
 
 void aes128(AES_KEY* key) {
     uint32_t words[KEYS_128];
