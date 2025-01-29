@@ -35,14 +35,12 @@ void aes(AES_KEY* key) {
 
 void aes128(AES_KEY* key) {
     uint32_t words[KEYS_128];
+    int i;
 
-    for (int i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
         words[i] = (key->key[i * 4] << 24) | (key->key[i * 4 + 1] << 16) |
                    (key->key[i * 4 + 2] << 8) | key->key[i * 4 + 3];
     }
 
-    for (int i = 0; i < 4; i++) {
-        printf("Word %d: %02x\n", i, words[i]);
-    }
 
 }
