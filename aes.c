@@ -25,13 +25,7 @@ uint32_t sub_word(uint32_t word) {
     return word;
 }
 
-void init_key(const uint32_t words[WORDS_128], uint32_t round_key[KEYS_128][KEY_SIZE]) {
-    for (int i = 0; i < KEYS_128; i++) {
-        for (int j = 0; j < KEY_SIZE; j++) {
-            round_key[i][j] = words[i * KEY_SIZE + j];
-        }
-    }
-}
+
 
 void gen_keys128(AES_KEY* key, uint32_t round_key[KEYS_128][KEY_SIZE]) {
     int i;
@@ -49,7 +43,7 @@ void gen_keys128(AES_KEY* key, uint32_t round_key[KEYS_128][KEY_SIZE]) {
             words[i] = words[i - 4] ^ words[i - 1];
         }
     }
-    init_key(words, round_key);
+    init_key_128(words, round_key);
 
 }
 
