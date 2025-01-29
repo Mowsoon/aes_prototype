@@ -1,9 +1,5 @@
 #ifndef AES_H
 #define AES_H
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <time.h>
 
 #define WORDS_128 44
 #define WORDS_192 52
@@ -12,6 +8,13 @@
 #define KEYS_192 13
 #define KEYS_256 15
 #define KEY_SIZE 4
+
+
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <time.h>
+#include "aes_128.h"
 
 typedef struct {
     uint8_t key[32];
