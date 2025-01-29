@@ -5,9 +5,13 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define KEYS_128 44
-#define KEYS_192 52
-#define KEYS_256 60
+#define WORDS_128 44
+#define WORDS_192 52
+#define WORDS_256 60
+#define KEYS_128 11
+#define KEYS_192 13
+#define KEYS_256 15
+#define KEY_SIZE 4
 
 typedef struct {
     uint8_t key[32];

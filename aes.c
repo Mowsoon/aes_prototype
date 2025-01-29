@@ -44,15 +44,23 @@ uint32_t sub_word(uint32_t word) {
     return word;
 }
 
-void gen_word128(AES_KEY* key, uint32_t words[KEYS_128]) {
-    int i;
+void init_key(const uint32_t words[WORDS_128], uint32_t round_key[KEYS_128][KEY_SIZE]) {
+    for (int i = 0; i < KEYS_128; i++) {
+        for (int j = 0; j < KEY_SIZE; j++) {
+            round_key[i][j] = words[i * KEY_SIZE + j];
+        }
+    }
+}
 
+void gen_keys128(AES_KEY* key, uint32_t round_key[KEYS_128][KEY_SIZE]) {
+    int i;
+    uint32_t words[WORDS_128];
     for (i = 0; i < 4; i++) {
         words[i] = (key->key[i * 4] << 24) | (key->key[i * 4 + 1] << 16) |
                    (key->key[i * 4 + 2] << 8) | key->key[i * 4 + 3];
     }
 
-    for (i = 4 ; i < KEYS_128; i++) {
+    for (i = 4 ; i < WORDS_128; i++) {
         if (i % 4 == 0) {
             words[i] = words[i - 4] ^ sub_word(rotate_left(words[i - 1])) ^ RCON[i/4];
         }
@@ -60,13 +68,14 @@ void gen_word128(AES_KEY* key, uint32_t words[KEYS_128]) {
             words[i] = words[i - 4] ^ words[i - 1];
         }
     }
+    init_key(words, round_key);
+
 }
 
-void aes128(AES_KEY* key) {
-    uint32_t words[KEYS_128];
-    gen_word128(key, words);
 
-    for (int i = 0; i < KEYS_128; i++) {
-        printf("Word %d: %08x\n", i, words[i]);
-    }
+
+void aes128(AES_KEY* key) {
+    uint32_t round_key[KEYS_128][KEY_SIZE];
+    gen_keys128(key, round_key);
+
 }
