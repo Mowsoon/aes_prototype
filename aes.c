@@ -31,11 +31,6 @@ uint32_t sub_word(uint32_t word) {
 
 
 
-void aes128(AES_KEY* key) {
-    uint32_t round_key[KEYS_128][KEY_SIZE];
-    gen_keys128(key, round_key);
-
-}
 
 
 void aes(AES_KEY* key) {

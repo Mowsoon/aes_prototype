@@ -28,3 +28,9 @@ void gen_keys128(AES_KEY* key, uint32_t round_key[KEYS_128][KEY_SIZE]) {
     init_key_128(words, round_key);
 
 }
+
+
+void aes128(AES_KEY* key) {
+    uint32_t round_key[KEYS_128][KEY_SIZE];
+    gen_keys128(key, round_key);
+}
