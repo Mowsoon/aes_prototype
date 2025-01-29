@@ -6,6 +6,4 @@ set(CMAKE_C_STANDARD 11)
 add_executable(test_AES main.c
         aes.h
         aes.c
-        aes_128.c
-        aes_192.c
-        aes_192.h)
+)
