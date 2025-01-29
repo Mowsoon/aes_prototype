@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+#define KEYS_128 44
+#define KEYS_192 52
+#define KEYS_256 60
 
 typedef struct {
     uint8_t key[32];
@@ -31,5 +34,6 @@ static const uint8_t sbox[256] = {
 
 
 void generate_aes_key_struct(AES_KEY* key, size_t key_len);
+void aes128(AES_KEY* key);
 
 #endif

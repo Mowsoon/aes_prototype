@@ -3,7 +3,6 @@
 
 int main() {
 
-    srand( time( NULL ) );
 
     AES_KEY aes_key;
     generate_aes_key_struct(&aes_key, 128);
@@ -11,8 +10,11 @@ int main() {
     printf("Key size (bytes): %zu\n", aes_key.key_size);
 
     for (int i = 0; i < aes_key.key_size; i++) {
-        printf("%04x ", aes_key.key[i]);
+        printf("%02x ", aes_key.key[i]);
     }
+    printf("\n");
+
+    aes128(&aes_key);
 
     return 0;
 }
