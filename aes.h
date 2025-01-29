@@ -13,6 +13,6 @@ typedef struct {
 
 
 
-void generate_aes_key_struct(AES_KEY *key, size_t key_len);
+void generate_aes_key_struct(AES_KEY* key, size_t key_len);
 
 #endif

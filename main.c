@@ -3,12 +3,8 @@
 
 int main() {
 
-    AES_KEY aes_key;
-    generate_aes_key_struct(&aes_key, 128);
+    AES_KEY key;
+    generate_aes_key_struct(&key, 128);
 
-
-
-
-
-    return 0;
+    printf("Key size (bytes): %zu\n", key.key_size);
 }
