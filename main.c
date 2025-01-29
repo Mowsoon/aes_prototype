@@ -3,6 +3,8 @@
 
 int main() {
 
+    srand( time( NULL ) );
+
     AES_KEY aes_key;
     generate_aes_key_struct(&aes_key, 128);
 
