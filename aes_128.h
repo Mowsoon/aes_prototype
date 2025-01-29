@@ -6,5 +6,5 @@
 
 #include "aes.h"
 
-
+void aes128(AES_KEY* key);
 #endif
