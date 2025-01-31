@@ -1,10 +1,11 @@
 #ifndef AES_H
 #define AES_H
 
-#define NUMBER_WORDS 60
 #define NUMBER_KEYS 15
 #define KEY_SIZE 32
+#define NUMBER_WORDS 60
 #define WORD_SIZE 4
+#define KEY_WORDS 8
 #define ROUND_KEY_SIZE 16
 
 

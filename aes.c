@@ -21,15 +21,23 @@ uint32_t sub_word(uint32_t word) {
 }
 
 
-void initiatefirstword(AES_KEY* key, uint32_t words[NUMBER_WORDS]) {
-    for (int i = 0; i < KEY_SIZE; i++) {
+void initiate_starting_words(AES_KEY* key, uint32_t words[NUMBER_WORDS]) {
+    for (int i = 0; i < KEY_WORDS; i++) {
         words[i] = (key->key[i * WORD_SIZE] << 24) | (key->key[i * WORD_SIZE + 1] << 16) |
                    (key->key[i * WORD_SIZE + 2] << 8) | key->key[i * WORD_SIZE + 3];
     }
 }
 
 void gen_words(AES_KEY* key, uint32_t words[NUMBER_WORDS]) {
-    initiatefirstword(key, words);
+    initiate_starting_words(key, words);
+
+    for (int i = KEY_WORDS; i < NUMBER_WORDS; i++) {
+        if ((i % KEY_WORDS) == 0) {
+            words[i] = words[i - KEY_WORDS] ^ sub_word(rotate_left(words[i - 1])) ^ RCON[i/KEY_WORDS];
+        } else {
+            words[i] = words[i - KEY_WORDS] ^ words[i - 1];
+        }
+    }
 }
 
 
