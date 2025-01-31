@@ -1,6 +1,5 @@
 #include "aes.h"
 
-
 void generate_aes_key(AES_KEY* key) {
     key->key_size = KEY_SIZE;
     for (size_t i = 0; i < KEY_SIZE; i++) {
@@ -71,6 +70,12 @@ void combine_block(uint32_t round_key[NUMBER_KEYS][BLOCK_ELEMENT], uint32_t bloc
     for (int i = 0; i < BLOCK_ELEMENT; i++) {
         block[i] = block[i] ^ round_key[key_index][i];
     }
+}
+
+uint8_t galois_mul(const uint8_t a, const uint8_t b) {
+    if(b == 0x01) return a;
+    if(b == 0x02) return (a << 1) ^ ((a & 0x80) ? 0x1B : 0x00);
+    return galois_mul(a, 0x02) ^ a;
 }
 
 
