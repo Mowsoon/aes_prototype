@@ -5,8 +5,8 @@
 #define KEY_SIZE 32
 #define NUMBER_WORDS 60
 #define WORD_SIZE 4
-#define KEY_WORDS 8
-#define ROUND_KEY_SIZE 16
+#define KEY_WORDS_RATIO 8
+#define ROUND_WORDS_RATIO 4
 
 
 

@@ -11,5 +11,7 @@ int main() {
         printf("%02x ", aes_key.key[i]);
     }
     printf("\n");
+
+    aes(&aes_key);
     return 0;
 }
