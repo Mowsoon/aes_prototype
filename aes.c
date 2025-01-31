@@ -93,7 +93,7 @@ uint32_t matrix_concatenation(const uint8_t blockInByte[BLOCK_ELEMENT][BLOCK_ELE
 
 }
 
-void init_bytes(const uint32_t block[BLOCK_ELEMENT], uint8_t blockInByte[BLOCK_ELEMENT][BLOCK_ELEMENT]) {
+void bloc_into_bytes(const uint32_t block[BLOCK_ELEMENT], uint8_t blockInByte[BLOCK_ELEMENT][BLOCK_ELEMENT]) {
 
     for (int i = 0; i < BLOCK_ELEMENT; i++) {
         blockInByte[0][i]   = block[i] >> 24;
@@ -101,6 +101,13 @@ void init_bytes(const uint32_t block[BLOCK_ELEMENT], uint8_t blockInByte[BLOCK_E
         blockInByte[2][i]   = block[i] >> 8;
         blockInByte[3][i]   = block[i];
     }
+}
+
+void bytes_into_block(uint32_t block [BLOCK_ELEMENT], const uint8_t blockInByte[BLOCK_ELEMENT][BLOCK_ELEMENT]) {
+    block[0] = matrix_concatenation(blockInByte, 0);
+    block[1] = matrix_concatenation(blockInByte, 1);
+    block[2] = matrix_concatenation(blockInByte, 2);
+    block[3] = matrix_concatenation(blockInByte,3);
 }
 
 void crypting(uint32_t round_key[NUMBER_KEYS][BLOCK_ELEMENT], uint32_t block [BLOCK_ELEMENT]) {
