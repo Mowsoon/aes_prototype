@@ -11,7 +11,8 @@ int main() {
         printf("%02x ", aes_key.key[i]);
     }
     printf("\n");
+    uint32_t block [BLOCK_ELEMENT];
 
-    aes(&aes_key);
+    aes(&aes_key, block);
     return 0;
 }

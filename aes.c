@@ -20,6 +20,13 @@ uint32_t sub_word(uint32_t word) {
     return word;
 }
 
+void sub_block(uint32_t block[BLOCK_ELEMENT]) {
+    for (int i = 0; i < BLOCK_ELEMENT; i++)
+    {
+        block[i] = sub_word(block[i]);
+    }
+}
+
 
 void initiate_starting_words(AES_KEY* key, uint32_t words[NUMBER_WORDS]) {
     for (int i = 0; i < KEY_WORDS_RATIO; i++) {
@@ -40,21 +47,34 @@ void gen_words(AES_KEY* key, uint32_t words[NUMBER_WORDS]) {
     }
 }
 
-void init_round_keys(const uint32_t words[NUMBER_WORDS], uint32_t round_key[NUMBER_KEYS][ROUND_WORDS_RATIO]) {
+void init_round_keys(const uint32_t words[NUMBER_WORDS], uint32_t round_key[NUMBER_KEYS][BLOCK_ELEMENT]) {
     for (int i = 0; i < NUMBER_KEYS; i++) {
-        for (int j = 0; j < ROUND_WORDS_RATIO; j++) {
+        for (int j = 0; j < BLOCK_ELEMENT; j++) {
             round_key[i][j] = words[i * WORD_SIZE + j];
         }
     }
 }
 
-void gen_keys_128(AES_KEY* key, uint32_t round_key[NUMBER_KEYS][ROUND_WORDS_RATIO]) {
+void gen_keys_128(AES_KEY* key, uint32_t round_key[NUMBER_KEYS][BLOCK_ELEMENT]) {
     uint32_t words[NUMBER_WORDS];
     gen_words(key, words);
     init_round_keys(words, round_key);
 }
 
-void aes(AES_KEY* key) {
-    uint32_t round_key[NUMBER_KEYS][ROUND_WORDS_RATIO];
+
+
+void crypting(uint32_t round_key[NUMBER_KEYS][BLOCK_ELEMENT], uint32_t block [BLOCK_ELEMENT]) {
+    int i;
+    for (i = 0; i < BLOCK_ELEMENT; i++) {
+        block[i] = block[i] ^ round_key[0][i];
+    }
+    for (i = 1; i < NUMBER_KEYS - 1; i++) {
+        sub_block(block);
+    }
+
+}
+
+void aes(AES_KEY* key, uint32_t block [BLOCK_ELEMENT]) {
+    uint32_t round_key[NUMBER_KEYS][BLOCK_ELEMENT];
     gen_keys_128(key, round_key);
 }

@@ -6,7 +6,7 @@
 #define NUMBER_WORDS 60
 #define WORD_SIZE 4
 #define KEY_WORDS_RATIO 8
-#define ROUND_WORDS_RATIO 4
+#define BLOCK_ELEMENT 4
 
 
 
@@ -47,6 +47,6 @@ static const uint32_t RCON[11] = {
 
 
 void generate_aes_key(AES_KEY* key);
-void aes(AES_KEY* key);
+void aes(AES_KEY* key, uint32_t block [BLOCK_ELEMENT]);
 
 #endif
