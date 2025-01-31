@@ -4,6 +4,7 @@
 #define NUMBER_WORDS 60
 #define NUMBER_KEYS 15
 #define KEY_SIZE 32
+#define WORD_SIZE 4
 #define ROUND_KEY_SIZE 16
 
 
