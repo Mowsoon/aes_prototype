@@ -18,7 +18,6 @@
 
 typedef struct {
     uint8_t key[32];
-    size_t key_size;
 } AES_KEY;
 
 static const uint8_t SBOX[256] = {

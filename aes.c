@@ -2,7 +2,6 @@
 
 // Function that generate a random 256bits key
 void generate_aes_key(AES_KEY* key) {
-    key->key_size = KEY_SIZE;
     for (size_t i = 0; i < KEY_SIZE; i++) {
         key->key[i] = rand() % 256;
     }
