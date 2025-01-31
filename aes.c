@@ -27,6 +27,12 @@ void sub_block(uint32_t block[BLOCK_ELEMENT]) {
     }
 }
 
+void transpose_block(uint32_t block[BLOCK_ELEMENT]) {
+    block[1] = (block[1] << 8) | (block[1] >> 24);
+    block[2] = (block[2] << 16) | (block[2] >> 16);
+    block[3] = (block[3] << 24) | (block[3] >> 8);
+}
+
 
 void initiate_starting_words(AES_KEY* key, uint32_t words[NUMBER_WORDS]) {
     for (int i = 0; i < KEY_WORDS_RATIO; i++) {
@@ -70,6 +76,7 @@ void crypting(uint32_t round_key[NUMBER_KEYS][BLOCK_ELEMENT], uint32_t block [BL
     }
     for (i = 1; i < NUMBER_KEYS - 1; i++) {
         sub_block(block);
+        transpose_block(block);
     }
 
 }
