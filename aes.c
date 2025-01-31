@@ -78,6 +78,13 @@ uint8_t galois_mul(const uint8_t a, const uint8_t b) {
     return galois_mul(a, 0x02) ^ a;
 }
 
+uint8_t matrix_mul(const uint8_t a[BLOCK_ELEMENT][BLOCK_ELEMENT], const int colums, const int shift) {
+    return galois_mul(a[colums][0], MIX_MATRIX[shift * BLOCK_ELEMENT]) ^
+                        galois_mul(a[colums][1], MIX_MATRIX[shift * BLOCK_ELEMENT + 1]) ^
+                            galois_mul(a[colums][2], MIX_MATRIX[shift * BLOCK_ELEMENT + 2]) ^
+                                galois_mul(a[colums][3], MIX_MATRIX[shift * BLOCK_ELEMENT + 3]);
+}
+
 
 void crypting(uint32_t round_key[NUMBER_KEYS][BLOCK_ELEMENT], uint32_t block [BLOCK_ELEMENT]) {
     combine_block(round_key, block, 0);
