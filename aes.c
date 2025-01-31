@@ -75,33 +75,8 @@ void gen_keys_128(AES_KEY* key, uint32_t** round_key) {
 }
 
 void aes(AES_KEY* key) {
-    int key_size, number_keys, number_words;
-    switch (key->key_size) {
-        case 16:
-            key_size = KEY_SIZE_128;
-            number_keys = NUMBER_KEYS_128;
-            number_words = NUMBER_WORDS_128;
-            break;
-
-        case 24:
-            key_size = KEY_SIZE_192;
-            number_keys = NUMBER_KEYS_192;
-            number_words = NUMBER_WORDS_192;
-            break;
-
-        case 32:
-            key_size = KEY_SIZE_256;
-            number_keys = NUMBER_KEYS_256;
-            number_words = NUMBER_WORDS_256;
-            break;
-
-        default:
-            printf("Key Size 8: Invalid Key Size\n");
-            exit(1);
-    }
-    uint32_t round_key[number_keys][key_size];
+    uint32_t round_key[NUMBER_KEYS][ROUND_KEY_SIZE];
     gen_keys_128(key, round_key);
 
     printf("%02x\n", round_key[0][0]);
 }
-*/
