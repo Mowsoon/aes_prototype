@@ -67,14 +67,16 @@ void gen_keys_128(AES_KEY* key, uint32_t round_key[NUMBER_KEYS][BLOCK_ELEMENT]) 
     init_round_keys(words, round_key);
 }
 
+void combine_block(uint32_t round_key[NUMBER_KEYS][BLOCK_ELEMENT], uint32_t block [BLOCK_ELEMENT], int key_index) {
+    for (int i = 0; i < BLOCK_ELEMENT; i++) {
+        block[i] = block[i] ^ round_key[key_index][i];
+    }
+}
 
 
 void crypting(uint32_t round_key[NUMBER_KEYS][BLOCK_ELEMENT], uint32_t block [BLOCK_ELEMENT]) {
-    int i;
-    for (i = 0; i < BLOCK_ELEMENT; i++) {
-        block[i] = block[i] ^ round_key[0][i];
-    }
-    for (i = 1; i < NUMBER_KEYS - 1; i++) {
+    combine_block(round_key, block, 0);
+    for (int i = 1; i < NUMBER_KEYS - 1; i++) {
         sub_block(block);
         transpose_block(block);
     }
