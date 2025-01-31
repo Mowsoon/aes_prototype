@@ -110,11 +110,19 @@ void bytes_into_block(uint32_t block [BLOCK_ELEMENT], const uint8_t blockInByte[
     block[3] = matrix_concatenation(blockInByte,3);
 }
 
+void mixing_block(uint32_t block [BLOCK_ELEMENT]) {
+    uint8_t blockInByte[BLOCK_ELEMENT][BLOCK_ELEMENT];
+    bloc_into_bytes(block, blockInByte);
+    bytes_into_block(block, blockInByte);
+}
+
 void crypting(uint32_t round_key[NUMBER_KEYS][BLOCK_ELEMENT], uint32_t block [BLOCK_ELEMENT]) {
     combine_block(round_key, block, 0);
     for (int i = 1; i < NUMBER_KEYS - 1; i++) {
         sub_block(block);
         transpose_block(block);
+        mixing_block(block);
+        combine_block(round_key, block, i);
     }
 
 }
