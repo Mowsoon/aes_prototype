@@ -54,6 +54,6 @@ static const uint8_t MIX_MATRIX[16] = {
 
 
 void generate_aes_key(AES_KEY* key);
-void aes(AES_KEY* key, uint32_t block [BLOCK_ELEMENT]);
+void aes_encrypt(AES_KEY key, uint32_t block [BLOCK_ELEMENT]);
 
 #endif
