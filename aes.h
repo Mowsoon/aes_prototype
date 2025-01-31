@@ -1,17 +1,9 @@
 #ifndef AES_H
 #define AES_H
 
-#define NUMBER_WORDS_128 44
-#define NUMBER_KEYS_128 11
-#define KEY_SIZE_128 4
-
-#define NUMBER_WORDS_192 52
-#define NUMBER_KEYS_192 13
-#define KEY_SIZE_192 6
-
-
-#define WORDS_256 60
-#define KEYS_256 15
+#define NUMBER_WORDS 60
+#define NUMBER_KEYS 15
+#define KEY_SIZE 32
 
 
 
@@ -51,7 +43,7 @@ static const uint32_t RCON[11] = {
 };
 
 
-void generate_aes_key(AES_KEY* key, size_t key_len);
+void generate_aes_key(AES_KEY* key);
 void aes(AES_KEY* key);
 
 #endif
