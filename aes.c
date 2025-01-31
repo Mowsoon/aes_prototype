@@ -85,6 +85,13 @@ uint8_t matrix_mul(const uint8_t a[BLOCK_ELEMENT][BLOCK_ELEMENT], const int colu
                                 galois_mul(a[colums][3], MIX_MATRIX[shift * BLOCK_ELEMENT + 3]);
 }
 
+uint32_t matrix_concatenation(const uint8_t blockInByte[BLOCK_ELEMENT][BLOCK_ELEMENT], const int shift) {
+    return  ((uint32_t)matrix_mul(blockInByte,0, shift) << 24) |
+                ((uint32_t)matrix_mul(blockInByte,1, shift) << 16) |
+                    ((uint32_t)matrix_mul(blockInByte,2, shift) << 8) |
+                        matrix_mul(blockInByte,3, shift);
+
+}
 
 void crypting(uint32_t round_key[NUMBER_KEYS][BLOCK_ELEMENT], uint32_t block [BLOCK_ELEMENT]) {
     combine_block(round_key, block, 0);
